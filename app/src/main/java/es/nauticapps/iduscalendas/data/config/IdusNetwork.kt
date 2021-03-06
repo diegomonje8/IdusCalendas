@@ -7,8 +7,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class IdusNetwork {
+class IdusNetwork @Inject constructor() {
 
     lateinit var service: IdusService
 
@@ -32,7 +33,7 @@ class IdusNetwork {
         loggerInterceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         builder.addInterceptor(loggerInterceptor)
 
-        val authToken = "ya29.a0AfH6SMCkHajKA50hli9z5eSqCfszA-5kukuGWBQcRR1EgtV6TPUYQWXi-3o5p9TiMb9rElQmAkmnJ2sKfW-urTJqyJjezTA9pHxkCnGbY-vatvgTKsLjFHe1FJOJn8nKZw1KFMQHEoREiEXghNvLO2QhiHdB"
+        val authToken = "ya29.a0AfH6SMCubR77r1TonLGcCCnAAeLhmVmHNO1Ypcw_3d95-vNDDgqAvQHsXd5xZdrPyPnvrmlUJX78vi9kVmhUqrSbxIiKctgaVqFtpvsONJZ1lvpfN3Idr9-9raaxVzi7AZB9ANyq8mTanKuNaSaVLckkHxp1"
 
         builder.addInterceptor { chain ->
             val request = chain.request().newBuilder()

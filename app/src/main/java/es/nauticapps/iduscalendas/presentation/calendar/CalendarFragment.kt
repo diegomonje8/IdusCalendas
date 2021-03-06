@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import es.nauticapps.iduscalendas.R
 import es.nauticapps.iduscalendas.base.BaseExtraData
 import es.nauticapps.iduscalendas.base.BaseFragment
@@ -18,6 +19,7 @@ import es.nauticapps.iduscalendas.databinding.FragmentCalendarBinding
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
+@AndroidEntryPoint
 class CalendarFragment : BaseFragment<CalendarListState, CalendarViewModel, FragmentCalendarBinding>() {
 
     lateinit var myAdapter : CalendarFragmentAdapter
