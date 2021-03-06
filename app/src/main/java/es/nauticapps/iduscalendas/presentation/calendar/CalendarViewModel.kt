@@ -18,7 +18,7 @@ class CalendarViewModel@Inject constructor(private val repository: IdusRepositor
         updateToLoadingState(CalendarListState())
 
         executeCoroutines( {
-            val listResult = repository.getALLCalendars()
+            val listResult = repository.getAllCalendars()
             updateToNormalState(CalendarListState(listResult))
         } , { error ->
             updateToErrorState(CalendarListState(listOf()), error)
