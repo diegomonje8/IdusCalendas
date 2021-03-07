@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import es.nauticapps.iduscalendas.data.Calendar
 import es.nauticapps.iduscalendas.databinding.ItemCalendarListBinding
+import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 
 //class CalendarFragmentAdapter (private var calendars: List<Calendar>, private var listener: (calendar: Calendar) -> Unit) : RecyclerView.Adapter<CalendarFragmentAdapter.ViewHolder>() {
-    class CalendarFragmentAdapter (private var calendars: List<Calendar>) : RecyclerView.Adapter<CalendarFragmentAdapter.ViewHolder>() {
+    class CalendarFragmentAdapter (private var calendars: List<CalendarDomainModel>) : RecyclerView.Adapter<CalendarFragmentAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemCalendarListBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -27,7 +28,7 @@ import es.nauticapps.iduscalendas.databinding.ItemCalendarListBinding
 
     override fun getItemCount() = calendars.size
 
-    fun updateList (newList: List<Calendar>) {
+    fun updateList (newList: List<CalendarDomainModel>) {
         calendars = newList
         notifyDataSetChanged()
     }

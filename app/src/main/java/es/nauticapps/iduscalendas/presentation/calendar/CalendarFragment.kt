@@ -16,6 +16,7 @@ import es.nauticapps.iduscalendas.base.BaseExtraData
 import es.nauticapps.iduscalendas.base.BaseFragment
 import es.nauticapps.iduscalendas.data.Calendar
 import es.nauticapps.iduscalendas.databinding.FragmentCalendarBinding
+import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
@@ -32,7 +33,7 @@ class CalendarFragment : BaseFragment<CalendarListState, CalendarViewModel, Frag
     override fun setupView(viewModel: CalendarViewModel) {
         vm = viewModel
 
-        myAdapter = CalendarFragmentAdapter(listOf<Calendar>())
+        myAdapter = CalendarFragmentAdapter(listOf<CalendarDomainModel>())
             //findNavController().navigate(HomeFragmentDirections.actionHomeFragment2ToArtistFragment(artist))
 
         val myRecyclerView : RecyclerView = binding.calendarFragmentRecycler

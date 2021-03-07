@@ -1,22 +1,28 @@
 package es.nauticapps.iduscalendas.data.idus.repository
 
 import es.nauticapps.iduscalendas.data.Calendar
-import es.nauticapps.iduscalendas.data.config.NetworkManager
+import es.nauticapps.iduscalendas.data.config.network.NetworkManager
+import es.nauticapps.iduscalendas.data.idus.repository.local.IdusLocalRepositoryImpl
 import es.nauticapps.iduscalendas.data.idus.repository.remote.IdusRemoteRepositoryImpl
+import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 import es.nauticapps.iduscalendas.domain.IdusRepository
 import javax.inject.Inject
 
-class IdusRepositoryImpl @Inject constructor(private val network: NetworkManager, private val remote: IdusRemoteRepositoryImpl ) : IdusRepository {
+class IdusRepositoryImpl @Inject constructor(private val network: NetworkManager, private val remote: IdusRemoteRepositoryImpl, private val local: IdusLocalRepositoryImpl ) : IdusRepository {
 
 
-    override suspend fun getAllCalendars(): List<Calendar> {
+    override suspend fun getAllCalendars(): List<CalendarDomainModel> {
 
         return if (network.isNetworkAvailable()) {
             remote.getAllCalendars()
         } else {
-            listOf()
+            local.getAllCalendars()
         }
 
+    }
+
+    override suspend fun insertCalendar(calendar: CalendarDomainModel) {
+        local.insertCalendar(calendar)
     }
 
 

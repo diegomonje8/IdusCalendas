@@ -3,6 +3,7 @@ package es.nauticapps.iduscalendas.presentation.calendar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import es.nauticapps.iduscalendas.base.BaseViewModel
 import es.nauticapps.iduscalendas.data.idus.repository.remote.IdusRemoteRepositoryImpl
+import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 import es.nauticapps.iduscalendas.domain.IdusRepository
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package es.nauticapps.iduscalendas.data.config
+package es.nauticapps.iduscalendas.data.config.network
 
 import android.content.Context
 import android.net.ConnectivityManager

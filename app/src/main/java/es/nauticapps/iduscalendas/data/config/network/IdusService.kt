@@ -1,4 +1,4 @@
-package es.nauticapps.iduscalendas.data.config
+package es.nauticapps.iduscalendas.data.config.network
 
 import es.nauticapps.iduscalendas.data.CalendarResponseDataModel
 import retrofit2.http.GET

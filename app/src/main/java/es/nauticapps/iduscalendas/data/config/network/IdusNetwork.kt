@@ -1,4 +1,4 @@
-package es.nauticapps.iduscalendas.data.config
+package es.nauticapps.iduscalendas.data.config.network
 
 
 import es.nauticapps.iduscalendas.data.CalendarResponseDataModel
@@ -7,7 +7,8 @@ import javax.inject.Inject
 class IdusNetwork @Inject constructor(private val service: IdusService) {
 
     suspend fun getAllCalendars() : CalendarResponseDataModel {
-        return service.getAllCalendars()
+        val serc = service.getAllCalendars()
+        return serc
     }
 
 

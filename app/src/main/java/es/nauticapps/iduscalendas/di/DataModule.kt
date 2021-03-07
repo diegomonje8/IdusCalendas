@@ -6,15 +6,18 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import es.nauticapps.iduscalendas.data.config.IdusNetwork
-import es.nauticapps.iduscalendas.data.config.IdusRetrofit
-import es.nauticapps.iduscalendas.data.config.IdusService
-import es.nauticapps.iduscalendas.data.config.NetworkManager
+import es.nauticapps.iduscalendas.data.config.local.AppDatabase
+import es.nauticapps.iduscalendas.data.config.local.IdusDao
+import es.nauticapps.iduscalendas.data.config.local.IdusDatabase
+import es.nauticapps.iduscalendas.data.config.local.IdusLocal
+import es.nauticapps.iduscalendas.data.config.network.IdusNetwork
+import es.nauticapps.iduscalendas.data.config.network.IdusRetrofit
+import es.nauticapps.iduscalendas.data.config.network.IdusService
+import es.nauticapps.iduscalendas.data.config.network.NetworkManager
 import es.nauticapps.iduscalendas.data.idus.repository.IdusRepositoryImpl
+import es.nauticapps.iduscalendas.data.idus.repository.local.IdusLocalRepositoryImpl
 import es.nauticapps.iduscalendas.data.idus.repository.remote.IdusRemoteRepositoryImpl
 import es.nauticapps.iduscalendas.domain.IdusRepository
-import retrofit2.Retrofit
-import retrofit2.create
 
 
 @Module
@@ -48,7 +51,8 @@ object DataModule {
     @Provides
     fun provideIdusRepository(context: Context) : IdusRepository = IdusRepositoryImpl(
         NetworkManager(context),
-        IdusRemoteRepositoryImpl(IdusNetwork(IdusRetrofit().loadRetrofit().create(IdusService::class.java)))
+        IdusRemoteRepositoryImpl(IdusNetwork(IdusRetrofit().loadRetrofit().create(IdusService::class.java))),
+        IdusLocalRepositoryImpl(IdusLocal(IdusDatabase(context).loadDatabase().idusDao()))
     )
 
 }

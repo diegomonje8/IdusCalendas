@@ -5,6 +5,7 @@ import es.nauticapps.iduscalendas.data.Calendar
 
 interface IdusRepository {
 
-    suspend fun getAllCalendars() : List<Calendar>
+    suspend fun getAllCalendars() : List<CalendarDomainModel>
+    suspend fun insertCalendar(calendar: CalendarDomainModel)
 
 }
