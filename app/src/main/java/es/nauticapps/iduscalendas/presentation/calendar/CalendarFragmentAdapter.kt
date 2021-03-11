@@ -4,12 +4,10 @@ package es.nauticapps.iduscalendas.presentation.calendar
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import es.nauticapps.iduscalendas.data.Calendar
 import es.nauticapps.iduscalendas.databinding.ItemCalendarListBinding
 import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 
-//class CalendarFragmentAdapter (private var calendars: List<Calendar>, private var listener: (calendar: Calendar) -> Unit) : RecyclerView.Adapter<CalendarFragmentAdapter.ViewHolder>() {
-    class CalendarFragmentAdapter (private var calendars: List<CalendarDomainModel>) : RecyclerView.Adapter<CalendarFragmentAdapter.ViewHolder>() {
+class CalendarFragmentAdapter (private var calendars: List<CalendarDomainModel>, private var listener: (calendar: CalendarDomainModel) -> Unit) : RecyclerView.Adapter<CalendarFragmentAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemCalendarListBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -23,6 +21,9 @@ import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 
         viewHolder.binding.calendarItemListTextSummary.text = calendars[position].summary
         viewHolder.binding.calendarItemListTextTimeZone.text = calendars[position].timeZone
+        viewHolder.binding.calendarItemListEditButton.setOnClickListener {
+            listener(calendars[position])
+        }
 
     }
 

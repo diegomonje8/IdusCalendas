@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    android:label="Edit Calendar"
     app:startDestination="@id/calendarFragment">
 
     <fragment
         android:id="@+id/calendarFragment"
         android:name="es.nauticapps.iduscalendas.presentation.calendar.CalendarFragment"
-        android:label="CalendarFragment"
+        android:label="Idus Calendas"
 
-        />
+        >
+        <action
+            android:id="@+id/action_calendarFragment_to_calendarAddFragment"
+            app:destination="@id/calendarAddFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_calendarEditFragment"
+            app:destination="@id/calendarEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarAddFragment"
+        android:name="es.nauticapps.iduscalendas.presentation.calendar.add.CalendarAddFragment"
+        android:label="Add Idus Calendas" />
+    <fragment
+        android:id="@+id/calendarEditFragment"
+        android:name="es.nauticapps.iduscalendas.presentation.calendar.edit.CalendarEditFragment"
+        android:label="Edit Idus Calendas" >
+        <argument
+            android:name="calendar"
+            app:argType="es.nauticapps.iduscalendas.domain.CalendarDomainModel" />
+    </fragment>
 </navigation>

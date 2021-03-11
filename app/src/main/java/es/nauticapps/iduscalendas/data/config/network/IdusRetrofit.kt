@@ -29,7 +29,7 @@ class IdusRetrofit @Inject constructor() {
         loggerInterceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         builder.addInterceptor(loggerInterceptor)
 
-        val authToken = "ya29.a0AfH6SMC6pzCL7FI0_69-jxDTEETBl_f93eisZekWS-XEHam16vm7tNwTD5SMIyUB_ffXmCxkxQ1TGv29RxJtxWk1pJ-eelvJb7Me3qfAfbPFbyd-ILWpY2U_Xyga2rBkhtFivcTyYhTTXXleaJBYGopVP7qw"
+        val authToken = "ya29.a0AfH6SMCCkf_-sJ_fkNk1T4sdzPfB8Ybi7aX3yb53J6G2U_kshT8bvRR2rBrtLc1O1V2Lbo3X5a1BV13yFe9f_bElxiqqWAazKjTqPxQmbQuIKr4YxpVIBj3dw8barqyTamCkXkTpZQuDf6_zsKSV6cAp8DI5Mw"
 
         builder.addInterceptor { chain ->
             val request = chain.request().newBuilder()

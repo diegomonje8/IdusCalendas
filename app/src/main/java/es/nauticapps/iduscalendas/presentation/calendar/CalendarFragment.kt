@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,8 +34,13 @@ class CalendarFragment : BaseFragment<CalendarListState, CalendarViewModel, Frag
     override fun setupView(viewModel: CalendarViewModel) {
         vm = viewModel
 
-        myAdapter = CalendarFragmentAdapter(listOf<CalendarDomainModel>())
-            //findNavController().navigate(HomeFragmentDirections.actionHomeFragment2ToArtistFragment(artist))
+        myAdapter = CalendarFragmentAdapter(listOf<CalendarDomainModel>()) { calendar ->
+            findNavController().navigate(CalendarFragmentDirections.actionCalendarFragmentToCalendarEditFragment(calendar))
+        }
+
+        binding.calendarFragmentFloatingButton.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(CalendarFragmentDirections.actionCalendarFragmentToCalendarAddFragment())
+        })
 
         val myRecyclerView : RecyclerView = binding.calendarFragmentRecycler
         myRecyclerView.apply {

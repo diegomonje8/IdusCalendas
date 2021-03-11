@@ -18,11 +18,14 @@ class IdusRepositoryImpl @Inject constructor(private val network: NetworkManager
         } else {
             local.getAllCalendars()
         }
-
     }
 
     override suspend fun insertCalendar(calendar: CalendarDomainModel) {
         local.insertCalendar(calendar)
+    }
+
+    override suspend fun newCalendar(name: String) {
+        remote.newCalendar(name)
     }
 
 

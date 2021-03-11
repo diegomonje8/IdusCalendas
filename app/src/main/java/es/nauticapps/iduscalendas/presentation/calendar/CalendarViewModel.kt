@@ -2,27 +2,25 @@ package es.nauticapps.iduscalendas.presentation.calendar
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import es.nauticapps.iduscalendas.base.BaseViewModel
-import es.nauticapps.iduscalendas.data.idus.repository.remote.IdusRemoteRepositoryImpl
-import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 import es.nauticapps.iduscalendas.domain.IdusRepository
 import javax.inject.Inject
 
 
 @HiltViewModel
-class CalendarViewModel@Inject constructor(private val repository: IdusRepository): BaseViewModel<CalendarListState>() {
+class CalendarViewModel @Inject constructor(private val repository: IdusRepository): BaseViewModel<CalendarListState>() {
 
     override val defaultState: CalendarListState = CalendarListState()
 
     override fun onStartFirstTime() {}
 
     fun getAllCalendars() {
-        updateToLoadingState(CalendarListState())
+        updateToLoadingState()
 
         executeCoroutines( {
             val listResult = repository.getAllCalendars()
             updateToNormalState(CalendarListState(listResult))
         } , { error ->
-            updateToErrorState(CalendarListState(listOf()), error)
+            updateToErrorState(CalendarListState(),error)
         } )
     }
 }

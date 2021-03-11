@@ -19,7 +19,6 @@ class IdusLocalRepositoryImpl @Inject constructor(private val local: IdusLocal) 
             if (item.accessRole.isNullOrEmpty()) { item.accessRole = ""}
         }
         return items.map { it.toDomainModel() }
-
     }
 
     suspend fun insertCalendar(calendar: CalendarDomainModel) {

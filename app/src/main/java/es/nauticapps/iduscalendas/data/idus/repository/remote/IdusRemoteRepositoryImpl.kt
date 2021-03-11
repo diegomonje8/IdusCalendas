@@ -2,6 +2,7 @@ package es.nauticapps.iduscalendas.data.idus.repository.remote
 
 
 import es.nauticapps.iduscalendas.data.config.network.IdusNetwork
+import es.nauticapps.iduscalendas.data.idus.model.RequestNewCalendar
 import es.nauticapps.iduscalendas.data.idus.model.toDomainModel
 import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 import javax.inject.Inject
@@ -20,5 +21,10 @@ class IdusRemoteRepositoryImpl @Inject constructor(private val network: IdusNetw
        return items.map { it.toDomainModel() }
 
     }
+
+    suspend fun newCalendar(name: String) {
+        network.newCalendar(RequestNewCalendar(summary = name))
+    }
+
 
 }
