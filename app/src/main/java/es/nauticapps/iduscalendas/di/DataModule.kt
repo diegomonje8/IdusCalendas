@@ -1,22 +1,23 @@
 package es.nauticapps.iduscalendas.di
 
+import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import es.nauticapps.iduscalendas.data.config.local.AppDatabase
-import es.nauticapps.iduscalendas.data.config.local.IdusDao
 import es.nauticapps.iduscalendas.data.config.local.IdusDatabase
 import es.nauticapps.iduscalendas.data.config.local.IdusLocal
 import es.nauticapps.iduscalendas.data.config.network.IdusNetwork
 import es.nauticapps.iduscalendas.data.config.network.IdusRetrofit
 import es.nauticapps.iduscalendas.data.config.network.IdusService
 import es.nauticapps.iduscalendas.data.config.network.NetworkManager
+import es.nauticapps.iduscalendas.data.config.network.auth.IdusRetrofitAuth
+import es.nauticapps.iduscalendas.data.config.network.auth.OAuthLocal
+import es.nauticapps.iduscalendas.data.config.network.auth.RefreshTokenAuthenticate
 import es.nauticapps.iduscalendas.data.idus.repository.IdusRepositoryImpl
-import es.nauticapps.iduscalendas.data.idus.repository.local.IdusLocalRepositoryImpl
-import es.nauticapps.iduscalendas.data.idus.repository.remote.IdusRemoteRepositoryImpl
 import es.nauticapps.iduscalendas.domain.IdusRepository
 
 
@@ -45,14 +46,23 @@ object DataModule {
     //@Provides
     //fun provideIdusRepository(remote: IdusRemoteRepositoryImpl) :  IdusRepository = IdusRepositoryImpl(remote)
 
+
+
+    @Provides
+    fun provideSharedPreferences(context: Context): SharedPreferences = context.getSharedPreferences("local", Activity.MODE_PRIVATE)
+
+    @Provides
+    fun provideOAuthLocal(sharedPreferences: SharedPreferences): OAuthLocal = OAuthLocal(sharedPreferences)
+
     @Provides
     fun provideContext(@ApplicationContext context: Context): Context = context
 
+
     @Provides
-    fun provideIdusRepository(context: Context) : IdusRepository = IdusRepositoryImpl(
+    fun provideIdusRepository(context: Context, auth: RefreshTokenAuthenticate, authLocal: OAuthLocal) : IdusRepository = IdusRepositoryImpl(
         NetworkManager(context),
-        IdusRemoteRepositoryImpl(IdusNetwork(IdusRetrofit().loadRetrofit().create(IdusService::class.java))),
-        IdusLocalRepositoryImpl(IdusLocal(IdusDatabase(context).loadDatabase().idusDao()))
+        IdusNetwork(IdusRetrofit(auth, authLocal, IdusRetrofitAuth().loadRetrofit()).loadRetrofit().create(IdusService::class.java)),
+        IdusLocal(IdusDatabase(context).loadDatabase().idusDao())
     )
 
 }

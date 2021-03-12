@@ -39,7 +39,7 @@ class CalendarAddViewModel  @Inject constructor(private val repository: IdusRepo
                     Log.e( "ERROR DIG", error.toString())
                 })
             } else {
-                updateToErrorState(CalendarListState(), FieldErrorException(FIELD_KEY_TITLE))
+                updateToErrorState(CalendarAddListState(), FieldErrorException(FIELD_KEY_TITLE))
             }
         }
 

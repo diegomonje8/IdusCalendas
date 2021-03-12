@@ -61,8 +61,8 @@ class CalendarEditViewModel  @Inject constructor(private val repository: IdusRep
                 })
             } else {
                 when {
-                    state.title.isEmpty() -> updateToErrorState(CalendarListState(), FieldErrorException(CalendarEditFragment.FIELD_KEY_TITLE))
-                    state.title.isEmpty() -> updateToErrorState(CalendarListState(), FieldErrorException(CalendarEditFragment.FIELD_KEY_DESC))
+                    state.title.isEmpty() -> updateToErrorState(CalendarEditListState(), FieldErrorException(CalendarEditFragment.FIELD_KEY_TITLE))
+                    state.title.isEmpty() -> updateToErrorState(CalendarEditListState(), FieldErrorException(CalendarEditFragment.FIELD_KEY_DESC))
                 }
             }
         }

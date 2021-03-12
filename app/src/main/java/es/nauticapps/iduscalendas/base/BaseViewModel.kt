@@ -37,12 +37,13 @@ abstract class BaseViewModel<VS: BaseViewState>: ViewModel() {
     /**
      * State management
      */
-    fun updateToNormalState(viewState: VS) {
-        updateView(BaseState.Normal(viewState))
-    }
 
     fun updateDataState(viewState: VS) {
         baseState = BaseState.Normal(viewState)
+    }
+
+    fun updateToNormalState(viewState: VS) {
+        updateView(BaseState.Normal(viewState))
     }
 
     fun updateToLoadingState(loadingData: BaseExtraData? = null) {
@@ -51,7 +52,7 @@ abstract class BaseViewModel<VS: BaseViewState>: ViewModel() {
         } ?: updateView(BaseState.Loading(defaultState, loadingData))
     }
 
-    fun updateToErrorState(errorData1: CalendarListState, errorData: Throwable = Throwable()) {
+    fun updateToErrorState(viewState: VS, errorData: Throwable = Throwable()) {
         baseState?.let {
             updateView(BaseState.Error(it.data, errorData))
         } ?: updateView(BaseState.Error(defaultState, errorData))
