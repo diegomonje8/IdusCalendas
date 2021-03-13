@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Idus Calendas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="calendar_timezone">Calendar TimeZone</string>
+    <string name="calendar_summary">Calendar Summary</string>
+    <string name="add_calendar">Add Calendar</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="new_calendar_added">A new calendar has been added to your account</string>
+    <string name="ok">Ok</string>
+    <string name="edit_calendar">Edit Calendar</string>
+    <string name="delete_calendar">Delete Calendar</string>
+    <string name="save_changes_to_calendar">Save Changes to Calendar</string>
+    <string name="calendar_name">Calendar name</string>
+    <string name="role">Role</string>
+    <string name="description">Description</string>
+    <string name="add_event">Add Event</string>
+    <string name="event_location">Event Location</string>
+    <string name="event_description">Event Description</string>
+    <string name="event_summary">Event Summary</string>
+    <string name="event_starts">Event starts</string>
+    <string name="event_ends">Event Ends</string>
+    <string name="invalid_credentials">Invalid Credentials</string>
+    <string name="networl_error">\"Network Error: \"</string>
+    <string name="unknow_error">Oops Unknown Error, Please try later !!</string>
+    <string name="add_event_to_calendar">Add Event To Calendar</string>
+</resources>
