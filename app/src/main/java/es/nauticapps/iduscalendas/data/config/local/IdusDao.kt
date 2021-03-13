@@ -2,7 +2,7 @@ package es.nauticapps.iduscalendas.data.config.local
 
 import androidx.room.*
 import es.nauticapps.iduscalendas.data.idus.model.IdusEntityCalendarDataModel
-import es.nauticapps.iduscalendas.data.idus.model.IdusEntityEventDataModel
+import es.nauticapps.iduscalendas.data.idus.model.IdusEventsDataModel
 
 
 @Dao
@@ -25,9 +25,14 @@ interface IdusDao {
 
 
 
+    @Query("SELECT * FROM events WHERE calendarId = :calendarId" )
+    suspend fun getAllEvents(calendarId: String) : List<IdusEventsDataModel>
 
+    @Query("DELETE FROM events WHERE calendarId = :calendarId" )
+    suspend fun deleteAllEvents(calendarId: String)
 
-
+    @Insert
+    suspend fun insertEvent(event: IdusEventsDataModel)
 
 
 }

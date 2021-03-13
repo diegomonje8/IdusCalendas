@@ -44,12 +44,22 @@ class IdusRepositoryImpl @Inject constructor(private val network: NetworkManager
 
     override suspend fun getAllEvents(calendarId: String): List<EventDomainModel> {
 
+        if (network.isNetworkAvailable()) {
+            val remoteEvents = remote.getAllEvents(calendarId).items.map { it.toDomainModel() }
+
+            val tmp : MutableList<IdusEventsDataModel> = mutableListOf()
+            remoteEvents.forEach { ev ->
+                tmp.add(IdusEventsDataModel(ev.id, calendarId,ev.summary, ev.description, ev.location, ev.startDate, ev.endDate))
+            }
+            local.refreshEvents(calendarId, tmp)
+
+            return remoteEvents
+        } else {
+            return local.getAllEnvents(calendarId).map { it.toDomaiModel() }
+        }
 
 
 
-           val remoteEvents = remote.getAllEvents(calendarId).items.map { it.toDomainModel() }
-
-           return remoteEvents
 
     }
 
