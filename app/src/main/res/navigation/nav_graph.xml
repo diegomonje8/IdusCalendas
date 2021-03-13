@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_calendarFragment_to_calendarEditFragment"
             app:destination="@id/calendarEditFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendarAddFragment"
@@ -29,5 +32,27 @@
         <argument
             android:name="calendar"
             app:argType="es.nauticapps.iduscalendas.domain.CalendarDomainModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="es.nauticapps.iduscalendas.presentation.events.EventFragment"
+        android:label="Idus Calendas Events">
+        <argument
+            android:name="calendar"
+            app:argType="es.nauticapps.iduscalendas.domain.CalendarDomainModel" />
+        <action
+            android:id="@+id/action_eventFragment_to_eventEditFragment"
+            app:destination="@id/eventEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventEditFragment"
+        android:name="es.nauticapps.iduscalendas.presentation.events.edit.EventEditFragment"
+        android:label="Manage Events" >
+        <argument
+            android:name="calendar"
+            app:argType="es.nauticapps.iduscalendas.domain.CalendarDomainModel" />
+        <argument
+            android:name="event"
+            app:argType="es.nauticapps.iduscalendas.domain.EventDomainModel" />
     </fragment>
 </navigation>

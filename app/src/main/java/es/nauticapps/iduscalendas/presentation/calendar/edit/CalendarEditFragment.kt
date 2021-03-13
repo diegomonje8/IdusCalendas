@@ -106,6 +106,8 @@ class CalendarEditFragment : BaseFragment<CalendarEditListState, CalendarEditVie
         binding.calendarEditInputDesc.doOnTextChanged { inputext, _ ,_ ,_ ->
             vm.onActionSetDesc(inputext.toString())
         }
+
+
     }
 
 

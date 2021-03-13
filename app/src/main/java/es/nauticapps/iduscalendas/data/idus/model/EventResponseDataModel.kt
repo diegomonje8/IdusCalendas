@@ -1,5 +1,9 @@
 package es.nauticapps.iduscalendas.data.idus.model
 
+import es.nauticapps.iduscalendas.data.Calendar
+import es.nauticapps.iduscalendas.domain.CalendarDomainModel
+import es.nauticapps.iduscalendas.domain.EventDomainModel
+
 data class EventResponseDataModel(
     val accessRole: String,
     val defaultReminders: List<DefaultReminder>,
@@ -23,8 +27,8 @@ data class EventItem(
     val conferenceData: EventConferenceData,
     val created: String,
     val creator: EventCreator,
-    val description: String,
-    val end: EventEnd,
+    val description: String? = null,
+    val end: EventEnd? = null,
     val endTimeUnspecified: Boolean,
     val etag: String,
     val eventType: String,
@@ -34,15 +38,15 @@ data class EventItem(
     val iCalUID: String,
     val id: String,
     val kind: String,
-    val location: String,
+    val location: String? = null,
     val organizer: EventOrganizer,
     val privateCopy: Boolean,
     val reminders: EventReminders,
     val sequence: Int,
     val source: EventSource,
-    val start: EventStart,
+    val start: EventStart? = null,
     val status: String,
-    val summary: String,
+    val summary: String? = null,
     val transparency: String,
     val updated: String,
     val visibility: String
@@ -75,8 +79,8 @@ data class EventCreator(
 )
 
 data class EventEnd(
-    val date: String,
-    val dateTime: String
+    val date: String? = null,
+    val dateTime: String? = null
 )
 
 data class EventOrganizer(
@@ -95,8 +99,8 @@ data class EventSource(
 )
 
 data class EventStart(
-    val date: String,
-    val dateTime: String
+    val date: String? = null,
+    val dateTime: String? = null
 )
 
 data class EventConferenceSolution(
@@ -116,3 +120,7 @@ data class EventEntryPoint(
 data class EventKey(
     val type: String
 )
+
+fun EventItem.toDomainModel() : EventDomainModel {
+    return EventDomainModel(id,summary ?: "", description ?: "", location ?: "", start?.dateTime ?: "", end?.dateTime ?: "")
+}

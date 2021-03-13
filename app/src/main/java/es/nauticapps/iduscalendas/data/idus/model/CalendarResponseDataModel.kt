@@ -10,21 +10,21 @@ data class CalendarResponseDataModel(
 )
 
 data class Calendar(
-    var accessRole: String = "",
+    var accessRole: String? = "",
     val backgroundColor: String = "",
     val colorId: String = "",
     val conferenceProperties: ConferenceProperties,
     val defaultReminders: List<DefaultReminder>,
-    var description: String = "",
+    var description: String? = "",
     val etag: String = "",
     val foregroundColor: String = "",
-    var id: String = "",
+    var id: String? = "",
     val kind: String = "",
     val notificationSettings: NotificationSettings,
     val primary: Boolean = false,
     val selected: Boolean = false,
-    var summary: String = "",
-    var timeZone: String = ""
+    var summary: String? = "",
+    var timeZone: String? = ""
 )
 
 data class ConferenceProperties(

@@ -46,8 +46,6 @@ object DataModule {
     //@Provides
     //fun provideIdusRepository(remote: IdusRemoteRepositoryImpl) :  IdusRepository = IdusRepositoryImpl(remote)
 
-
-
     @Provides
     fun provideSharedPreferences(context: Context): SharedPreferences = context.getSharedPreferences("local", Activity.MODE_PRIVATE)
 

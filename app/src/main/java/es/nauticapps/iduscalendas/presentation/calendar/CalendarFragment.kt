@@ -1,8 +1,5 @@
 package es.nauticapps.iduscalendas.presentation.calendar
 
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +9,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import es.nauticapps.iduscalendas.R
 import es.nauticapps.iduscalendas.base.BaseExtraData
 import es.nauticapps.iduscalendas.base.BaseFragment
-import es.nauticapps.iduscalendas.data.Calendar
 import es.nauticapps.iduscalendas.databinding.FragmentCalendarBinding
 import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 import retrofit2.HttpException
-import java.net.UnknownHostException
 
 @AndroidEntryPoint
 class CalendarFragment : BaseFragment<CalendarListState, CalendarViewModel, FragmentCalendarBinding>() {
@@ -34,9 +28,17 @@ class CalendarFragment : BaseFragment<CalendarListState, CalendarViewModel, Frag
     override fun setupView(viewModel: CalendarViewModel) {
         vm = viewModel
 
-        myAdapter = CalendarFragmentAdapter(listOf<CalendarDomainModel>()) { calendar ->
-            findNavController().navigate(CalendarFragmentDirections.actionCalendarFragmentToCalendarEditFragment(calendar))
-        }
+        myAdapter = CalendarFragmentAdapter(listOf<CalendarDomainModel>(), object: CalendarFragmentAdapter.onCardClicksListener {
+            override fun onCalendarClicked(item: CalendarDomainModel) {
+                findNavController().navigate(CalendarFragmentDirections.actionCalendarFragmentToEventFragment(item))
+            }
+
+            override fun onEditButtonClicked(item: CalendarDomainModel) {
+                findNavController().navigate(CalendarFragmentDirections.actionCalendarFragmentToCalendarEditFragment(item))
+            }
+
+        })
+
 
         binding.calendarFragmentFloatingButton.setOnClickListener(View.OnClickListener {
             findNavController().navigate(CalendarFragmentDirections.actionCalendarFragmentToCalendarAddFragment())

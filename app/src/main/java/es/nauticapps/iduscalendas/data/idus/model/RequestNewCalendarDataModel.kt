@@ -1,6 +1,6 @@
 package es.nauticapps.iduscalendas.data.idus.model
 
-data class RequestNewCalendar(
+data class RequestNewCalendarDataModel(
     val summary: String = ""
 )
 

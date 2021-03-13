@@ -8,7 +8,7 @@ import javax.inject.Inject
 class IdusDatabase @Inject constructor(@ApplicationContext private val context: Context) {
 
     fun loadDatabase(): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, "iduscalendas.db").build()
+        return Room.databaseBuilder(context, AppDatabase::class.java, "iduscalendasdb.db").build()
     }
 
 }

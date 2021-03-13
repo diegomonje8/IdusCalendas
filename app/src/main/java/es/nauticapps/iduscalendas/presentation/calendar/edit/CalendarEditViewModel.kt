@@ -54,7 +54,7 @@ class CalendarEditViewModel  @Inject constructor(private val repository: IdusRep
         checkDataState { state ->
             if (state.title.isNotEmpty() && state.description.isNotEmpty()) {
                 executeCoroutines({
-                    //repository.editCalendat(title: title, desc: description)
+                    repository.updateCalendar(CalendarDomainModel(state.calendar?.id ?: "", summary = state.title, description = state.description, timeZone = state.calendar?.timeZone ?: "", accessRole = state.calendar?.accessRole ?: "" ))
                     updateToLoadingState(BaseExtraData(CalendarEditFragment.CODE_UPDATE_RIGHT))
                 }, { error ->
                     Log.e( "ERROR DIG", error.toString())
@@ -62,7 +62,7 @@ class CalendarEditViewModel  @Inject constructor(private val repository: IdusRep
             } else {
                 when {
                     state.title.isEmpty() -> updateToErrorState(CalendarEditListState(), FieldErrorException(CalendarEditFragment.FIELD_KEY_TITLE))
-                    state.title.isEmpty() -> updateToErrorState(CalendarEditListState(), FieldErrorException(CalendarEditFragment.FIELD_KEY_DESC))
+                    state.description.isEmpty() -> updateToErrorState(CalendarEditListState(), FieldErrorException(CalendarEditFragment.FIELD_KEY_DESC))
                 }
             }
         }
@@ -73,7 +73,7 @@ class CalendarEditViewModel  @Inject constructor(private val repository: IdusRep
 
         checkDataState { state ->
             executeCoroutines({
-                //repository.deleteCalendat(title: title, desc: description)
+                repository.deleteCalendar((CalendarDomainModel(state.calendar?.id ?: "", summary = state.title, description = state.description, timeZone = state.calendar?.timeZone ?: "", accessRole = state.calendar?.accessRole ?: "" )))
                 updateToLoadingState(BaseExtraData(CalendarEditFragment.CODE_DELETE_RIGHT))
             }, { error ->
                 Log.e( "ERROR DIG", error.toString())

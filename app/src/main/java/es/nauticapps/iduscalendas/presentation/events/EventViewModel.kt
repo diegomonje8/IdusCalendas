@@ -2,6 +2,7 @@ package es.nauticapps.iduscalendas.presentation.events
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import es.nauticapps.iduscalendas.base.BaseViewModel
+import es.nauticapps.iduscalendas.domain.CalendarDomainModel
 import es.nauticapps.iduscalendas.domain.EventDomainModel
 import es.nauticapps.iduscalendas.domain.IdusRepository
 import javax.inject.Inject
@@ -13,12 +14,11 @@ class EventViewModel @Inject constructor(private val repository: IdusRepository)
 
     override fun onStartFirstTime() {}
 
-    fun getAllEvents() {
+    fun getAllEvents(calendar: CalendarDomainModel) {
         updateToLoadingState()
 
         executeCoroutines( {
-            //val listResult = repository.getAllCalendars()
-            val listResult = listOf<EventDomainModel>()
+            val listResult = repository.getAllEvents(calendarId = calendar.id)
             updateToNormalState(EventListState(listResult))
         } , { error ->
             updateToErrorState(EventListState(), error)

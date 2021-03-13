@@ -2,6 +2,7 @@ package es.nauticapps.iduscalendas.data.config.local
 
 import androidx.room.*
 import es.nauticapps.iduscalendas.data.idus.model.IdusEntityCalendarDataModel
+import es.nauticapps.iduscalendas.data.idus.model.IdusEntityEventDataModel
 
 
 @Dao
@@ -18,6 +19,15 @@ interface IdusDao {
 
     @Delete
     suspend fun deleteCalendar(calendar: IdusEntityCalendarDataModel)
+
+    @Query("DELETE FROM calendars WHERE status = 0")
+    suspend fun deleteAllCalendars()
+
+
+
+
+
+
 
 
 }

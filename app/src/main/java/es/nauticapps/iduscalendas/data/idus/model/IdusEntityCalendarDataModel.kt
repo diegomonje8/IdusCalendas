@@ -13,15 +13,16 @@ data class IdusEntityCalendarDataModel(
     @ColumnInfo(name = "summary") var summary : String,
     @ColumnInfo(name = "description") var description: String,
     @ColumnInfo(name = "timeZone") var timeZone: String,
-    @ColumnInfo(name = "accessRole") var accessRole: String
+    @ColumnInfo(name = "accessRole") var accessRole: String,
+    @ColumnInfo(name = "status") var status: Int
 )
 
-fun Calendar.toDaoModel(): IdusEntityCalendarDataModel {
-    return IdusEntityCalendarDataModel(id, summary, description, timeZone, accessRole)
-}
+//fun Calendar.toDaoModel(): IdusEntityCalendarDataModel {
+//    return IdusEntityCalendarDataModel(id ?: "", summary ?: "", description ?: "", timeZone ?: "", accessRole ?: "", status())
+//}
 
 fun CalendarDomainModel.toDaoModel(): IdusEntityCalendarDataModel {
-    return IdusEntityCalendarDataModel(id, summary, description, timeZone, accessRole)
+    return IdusEntityCalendarDataModel(id, summary, description, timeZone, accessRole, status = 0)
 }
 
 fun IdusEntityCalendarDataModel.toDomainModel(): CalendarDomainModel {
@@ -29,5 +30,5 @@ fun IdusEntityCalendarDataModel.toDomainModel(): CalendarDomainModel {
 }
 
 fun Calendar.toDomainModel() : CalendarDomainModel {
-    return CalendarDomainModel(id,summary,description,timeZone,accessRole)
+    return CalendarDomainModel(id ?: "",summary ?: "",description ?: "",timeZone ?: "",accessRole ?: "")
 }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ import es.nauticapps.iduscalendas.base.BaseExtraData
 import es.nauticapps.iduscalendas.base.BaseFragment
 import es.nauticapps.iduscalendas.databinding.FragmentEventBinding
 import es.nauticapps.iduscalendas.domain.EventDomainModel
+import es.nauticapps.iduscalendas.presentation.calendar.edit.CalendarEditFragmentArgs
 import retrofit2.HttpException
 
 @AndroidEntryPoint
@@ -26,16 +28,20 @@ class EventFragment : BaseFragment<EventListState, EventViewModel, FragmentEvent
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentEventBinding = FragmentEventBinding::inflate
 
+    private val args: EventFragmentArgs by navArgs()
+
     override fun setupView(viewModel: EventViewModel) {
         vm = viewModel
 
         myAdapter = EventFragmentAdapter(listOf<EventDomainModel>()) { event ->
-            //findNavController().navigate(CalendarFragmentDirections.actionCalendarFragmentToCalendarEditFragment(calendar))
+            findNavController().navigate(EventFragmentDirections.actionEventFragmentToEventEditFragment(args.calendar, event))
         }
 
         binding.eventFragmentFloatingButton.setOnClickListener(View.OnClickListener {
-            //findNavController().navigate(CalendarFragmentDirections.actionCalendarFragmentToCalendarAddFragment())
+            findNavController().navigate(EventFragmentDirections.actionEventFragmentToEventEditFragment(args.calendar, EventDomainModel("","", "", "", "", "")))
         })
+
+        binding.eventFragmentCalendarSummary.text = args.calendar.summary
 
         val myRecyclerView : RecyclerView = binding.eventFragmentRecycler
         myRecyclerView.apply {
@@ -46,7 +52,7 @@ class EventFragment : BaseFragment<EventListState, EventViewModel, FragmentEvent
         }
 
 
-        vm.getAllEvents()
+        vm.getAllEvents(args.calendar)
     }
 
     override fun onNormal(data: EventListState) {
